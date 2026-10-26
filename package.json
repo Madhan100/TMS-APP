@@ -1,0 +1,26 @@
+{
+  "name": "tms-app",
+  "version": "1.0.0",
+  "description": "TMS - Complaint Management System (Backend, React Web, and React Native Expo Mobile App)",
+  "scripts": {
+    "start": "npm start --prefix mobile",
+    "web": "npm run web --prefix mobile",
+    "tunnel": "npm run tunnel --prefix mobile",
+    "mobile": "npm start --prefix mobile",
+    "mobile:tunnel": "npm run tunnel --prefix mobile",
+    "mobile:android": "npm run android --prefix mobile",
+    "mobile:ios": "npm run ios --prefix mobile",
+    "mobile:web": "npm run web --prefix mobile",
+    "iphone": "npm run tunnel --prefix mobile",
+    "backend": "npm run dev --prefix backend",
+    "frontend": "npm start --prefix frontend"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "complaint-management",
+    "mern"
+  ],
+  "author": "",
+  "license": "ISC"
+}

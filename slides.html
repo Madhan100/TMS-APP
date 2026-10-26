@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TMS Project Presentation - Madan L (1P25MC030)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(51, 65, 85, 0.8);
+      --primary: #38bdf8;
+      --emerald: #34d399;
+      --rose: #f87171;
+      --violet: #a78bfa;
+      --amber: #fbbf24;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+    }
+
+    .slide-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(167, 139, 250, 0.08) 0%, transparent 40%);
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1250px;
+      height: 88vh;
+      max-height: 750px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem 3.2rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      flex-direction: column;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    .slide.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.8rem;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+      padding-bottom: 1rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      display: inline-block;
+    }
+
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .slide-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: var(--muted);
+      background: rgba(30, 41, 59, 0.6);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      gap: 1.8rem;
+      overflow-y: auto;
+    }
+
+    .col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.6rem 1.8rem;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .danger-border { border-left: 4px solid var(--rose); }
+    .success-border { border-left: 4px solid var(--emerald); }
+    .info-border { border-left: 4px solid var(--primary); }
+    .purple-border { border-left: 4px solid var(--violet); }
+
+    ul.point-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    ul.point-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
+    ul.point-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .danger-border ul.point-list li::before { color: var(--rose); }
+    .success-border ul.point-list li::before { content: "✓"; color: var(--emerald); font-size: 1.1rem; }
+
+    strong { color: #fff; }
+
+    .pill-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+
+    .pill {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      width: 100%;
+      height: 100%;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .step-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--card-border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover { background: var(--primary); color: #0b1120; }
+    .shortcuts { font-size: 0.75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+    @media print {
+      body { overflow: visible; height: auto; }
+      .slide { display: flex !important; page-break-after: always; height: 100vh; max-height: none; }
+      .nav-bar { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide-container">
+    
+    <!-- SLIDE 1: PROJECT INTRODUCTION -->
+    <div class="slide active" id="slide-1">
+      <div class="slide-header">
+        <div>
+          <span class="badge">3rd Semester MCA • Viva-Voce Presentation</span>
+          <h1 class="slide-title">1. Project Introduction</h1>
+        </div>
+        <div class="slide-counter">01 / 05</div>
+      </div>
+      <div class="slide-body" style="flex-direction: column; justify-content: center; gap: 1.6rem;">
+        <h2 style="font-size: 2rem; color: #fff; font-weight: 800;">
+          TMS: Complaint & Facility Management System
+        </h2>
+        <p style="font-size: 1.25rem; color: #cbd5e1; max-width: 950px; line-height: 1.5;">
+          A Smart <strong style="color: var(--primary);">MERN Stack</strong> Web Portal and <strong style="color: var(--violet);">React Native (Expo)</strong> Mobile Application built to report, track, and resolve campus hardware, software, and facility complaints.
+        </p>
+
+        <div class="pill-container">
+          <span class="pill">MERN Stack</span>
+          <span class="pill">React Native</span>
+          <span class="pill">Expo Mobile</span>
+          <span class="pill">JWT Authentication</span>
+          <span class="pill">Role-Based Access (RBAC)</span>
+          <span class="pill">REST API</span>
+        </div>
+
+        <div class="card info-border" style="margin-top: 1.2rem; background: rgba(30, 41, 59, 0.5);">
+          <div class="card-title" style="color: var(--primary); font-size: 0.95rem; text-transform: uppercase;">Student & Project Details</div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; font-size: 0.95rem;">
+            <div><span style="color: var(--muted);">Candidate Name:</span> <br><strong style="font-size: 1.2rem; color: #fff;">Madan L</strong></div>
+            <div><span style="color: var(--muted);">Register Number:</span> <br><strong style="font-size: 1.2rem; color: var(--primary);">1P25MC030</strong></div>
+            <div><span style="color: var(--muted);">Degree & Semester:</span> <br><strong>3rd Sem MCA</strong></div>
+            <div><span style="color: var(--muted);">Domain:</span> <br><strong>Full-Stack Web & Mobile</strong></div>
+            <div><span style="color: var(--muted);">Architecture:</span> <br><strong>3-Tier MVC Architecture</strong></div>
+            <div><span style="color: var(--muted);">Database:</span> <br><strong>MongoDB Document DB</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: PROBLEM & SOLUTION -->
+    <div class="slide" id="slide-2">
+      <div class="slide-header">
+        <div>
+          <span class="badge">Context & Need</span>
+          <h1 class="slide-title">2. Problem & Solution</h1>
+        </div>
+        <div class="slide-counter">02 / 05</div>
+      </div>
+      <div class="slide-body">
+        <div class="col">
+          <div class="card danger-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--rose);">⚠️ The Problem (Old Manual System)</div>
+            <ul class="point-list">
+              <li><strong>Lost Complaints:</strong> Paper register entries easily get misplaced, torn, or ignored.</li>
+              <li><strong>No Live Tracking:</strong> Complainants have no idea who is fixing their issue or when it will be done.</li>
+              <li><strong>No Photo Evidence:</strong> Verbal complaints fail to capture exact error codes or physical hardware damage.</li>
+              <li><strong>Communication Delay:</strong> Manual assignment of technicians takes days instead of minutes.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card success-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--emerald);">🎯 The Solution (TMS App)</div>
+            <ul class="point-list">
+              <li><strong>100% Digital Tickets:</strong> Raise complaints in seconds from Mobile App or Web Portal.</li>
+              <li><strong>Live Progress Tracking:</strong> Transparent stages: <em>Pending ➔ Assigned ➔ In-Progress ➔ Resolved</em>.</li>
+              <li><strong>Photo Proof Upload:</strong> Attach photos directly from smartphone camera to verify the problem.</li>
+              <li><strong>Exact Location Tagging:</strong> Structured hierarchy: <em>Department ➔ Block ➔ Room</em>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: TECHNOLOGY USED -->
+    <div class="slide" id="slide-3">
+      <div class="slide-header">
+        <div>
+          <span class="badge">Core Tech Stack</span>
+          <h1 class="slide-title">3. Technology Used</h1>
+        </div>
+        <div class="slide-counter">03 / 05</div>
+      </div>
+      <div class="slide-body">
+        <div class="col">
+          <div class="card info-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--primary);">1. Frontend (Client)</div>
+            <ul class="point-list">
+              <li><strong>React 18 (Web):</strong> Fast Single-Page Application for SuperAdmin dashboard and master management.</li>
+              <li><strong>React Native (Expo):</strong> Cross-platform mobile app running smoothly on Android and iOS devices.</li>
+              <li><strong>Axios HTTP:</strong> Seamless REST API integration with token handling.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card purple-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--violet);">2. Backend (Server)</div>
+            <ul class="point-list">
+              <li><strong>Node.js & Express.js:</strong> Asynchronous, non-blocking REST API with 28+ modular endpoints.</li>
+              <li><strong>JWT Authentication:</strong> Stateless token verification ensuring secure user sessions.</li>
+              <li><strong>Role-Based Access (RBAC):</strong> Strict permission middleware separating Admin, Staff, and Users.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card success-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--emerald);">3. Database & Security</div>
+            <ul class="point-list">
+              <li><strong>MongoDB NoSQL:</strong> High-speed document database storing users, tickets, and campus masters.</li>
+              <li><strong>Mongoose ODM:</strong> Strict schema validation and relational references (`.populate()`).</li>
+              <li><strong>bcryptjs Hashing:</strong> Salted password encryption preventing plain-text credential leaks.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: HOW TMS WORKS -->
+    <div class="slide" id="slide-4">
+      <div class="slide-header">
+        <div>
+          <span class="badge">End-to-End Workflow</span>
+          <h1 class="slide-title">4. How TMS Works</h1>
+        </div>
+        <div class="slide-counter">04 / 05</div>
+      </div>
+      <div class="slide-body">
+        <div class="steps-row">
+          <div class="step-card" style="border-top: 3px solid var(--primary);">
+            <div class="step-num">Step 01</div>
+            <div class="step-title">Raise Ticket</div>
+            <div class="step-desc">User opens Mobile App, selects <em>Department ➔ Block ➔ Room</em>, chooses category (PC, Software, Network), and attaches a camera photo.</div>
+          </div>
+
+          <div class="step-card" style="border-top: 3px solid var(--violet);">
+            <div class="step-num" style="color: var(--violet);">Step 02</div>
+            <div class="step-title">Admin Assigns</div>
+            <div class="step-desc">SuperAdmin reviews incoming tickets in real-time on Web Portal and assigns the task to a specialized technician.</div>
+          </div>
+
+          <div class="step-card" style="border-top: 3px solid var(--amber);">
+            <div class="step-num" style="color: var(--amber);">Step 03</div>
+            <div class="step-title">Resolve on Site</div>
+            <div class="step-desc">Technician checks assigned ticket on Mobile App, visits the location, updates status to <em>In-Progress</em>, and rectifies the fault.</div>
+          </div>
+
+          <div class="step-card" style="border-top: 3px solid var(--emerald);">
+            <div class="step-num" style="color: var(--emerald);">Step 04</div>
+            <div class="step-title">Close & Report</div>
+            <div class="step-desc">Technician marks ticket as <em>Resolved</em>. System maintains complete audit log and generates department-wise metrics.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: BENEFITS & FUTURE SCOPE -->
+    <div class="slide" id="slide-5">
+      <div class="slide-header">
+        <div>
+          <span class="badge">Outcome & Road Ahead</span>
+          <h1 class="slide-title">5. Benefits & Future Scope</h1>
+        </div>
+        <div class="slide-counter">05 / 05</div>
+      </div>
+      <div class="slide-body">
+        <div class="col">
+          <div class="card info-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--primary);">⭐ Key Benefits of TMS</div>
+            <ul class="point-list">
+              <li><strong>Zero Paperwork:</strong> 100% digital ticketing prevents lost records and saves stationery costs.</li>
+              <li><strong>Fast Resolution:</strong> Direct routing to technicians cuts resolution time by up to 80%.</li>
+              <li><strong>Total Transparency:</strong> Complainants can see real-time status updates at any time.</li>
+              <li><strong>Dynamic IP Switcher:</strong> In-app server configurator in mobile app allows live demo testing effortlessly.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card purple-border" style="height: 100%;">
+            <div class="card-title" style="color: var(--violet);">🚀 Future Enhancements</div>
+            <ul class="point-list">
+              <li><strong>Push Notifications (FCM):</strong> Instant mobile alerts when a ticket is assigned or resolved.</li>
+              <li><strong>Automated SLA Escalation:</strong> Auto-alerts HOD if a critical complaint is unattended for 24 hours.</li>
+              <li><strong>AI Auto-Classification:</strong> Uses NLP to read complaint text and auto-assign technicians.</li>
+              <li><strong>In-App Live Chat:</strong> Direct messaging between complainant and assigned technician.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="prevSlide()">◀ Previous</button>
+    <span class="shortcuts">Use [←] / [→] keys • Press [F11] for Fullscreen</span>
+    <button class="nav-btn" onclick="nextSlide()">Next ▶</button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 5;
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide').forEach((slide, idx) => {
+        if (idx + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+  </script>
+</body>
+</html>
